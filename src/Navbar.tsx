@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { useMediaQuery } from "@uidotdev/usehooks";
 type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuItem[] = [
@@ -64,13 +63,8 @@ const items: MenuItem[] = [
 
 
 function NavBar() {
-    const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
-
-    if (isSmallDevice) {
-        return <></>;
-    }
     return (
-        <Menu style={{ width: 250, }}
+        <Menu
             defaultOpenKeys={['main1']}
             mode="inline"
             items={items}

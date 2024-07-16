@@ -3,7 +3,7 @@ import { Base64 as Base64Converter } from './utils/Base64';
 import { GBK } from './utils/GBK';
 import { useState } from 'react';
 import { DownOutlined } from '@ant-design/icons';
-import { Flex, Input, Dropdown, Button, message, Breadcrumb } from 'antd';
+import { Flex, Input, Dropdown, Button, message, Breadcrumb, Card, Typography } from 'antd';
 import { useMediaQuery, useWindowSize } from "@uidotdev/usehooks";
 import { menuItems, menuItems2 } from "./MenuItems";
 import type { MenuProps } from 'antd';
@@ -83,7 +83,7 @@ function Base64() {
     };
 
     const windowSize = useWindowSize();
-    const style: any = { height: 120, resize: 'none', minWidth: 400 };
+    const style: any = { height: 120, minWidth: 400 };
     if (windowSize.width) {
         if (windowSize.width <= 768)
             style.width = windowSize.width - 80;
@@ -93,8 +93,8 @@ function Base64() {
     const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
     return (
-        <Flex gap="middle" vertical align="center" style={{ margin: isSmallDevice ? '40px 40px' : '40px 0' }} >
-            <Breadcrumb
+        <Flex gap="middle" vertical align="flex-start" style={{ margin: isSmallDevice ? '40px 40px' : '40px 0' }} >
+            <Breadcrumb style={{ padding: '0  0  0 32px' }}
                 items={[
                     {
                         title: '编码',
@@ -109,20 +109,25 @@ function Base64() {
                     }
                 ]}
             />
-            <h2>Base64编码</h2>
-            <TextArea style={style} id='text' />
-            <Flex gap="middle" vertical={false} align='center'>
-                <label>编码方式</label>
-                <Dropdown menu={menuProps}>
-                    <Button style={{ width: 120 }} >
-                        <label>{method}</label>
-                        <DownOutlined />
-                    </Button>
-                </Dropdown>
-                <Button type="primary" onClick={encode}>编码</Button>
-                <Button type="primary" onClick={decode}>解码</Button>
-            </Flex >
-            <TextArea disabled style={style} id='text2' />
+            <Card hoverable>
+                <Flex gap="small" vertical>
+                    <Typography.Title level={4}>Base64编码</Typography.Title>
+                    <Typography.Text type='secondary'>在线BASE64编码解码</Typography.Text>
+                    <TextArea style={style} id='text' />
+                    <Flex gap="middle" vertical={false} align='center'>
+                        <label>编码方式</label>
+                        <Dropdown menu={menuProps}>
+                            <Button style={{ width: 120 }} >
+                                <label>{method}</label>
+                                <DownOutlined />
+                            </Button>
+                        </Dropdown>
+                        <Button type="primary" onClick={encode}>编码</Button>
+                        <Button type="primary" onClick={decode}>解码</Button>
+                    </Flex >
+                    <TextArea disabled style={style} id='text2' />
+                </Flex >
+            </Card>
         </Flex >
     )
 }

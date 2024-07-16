@@ -1,7 +1,7 @@
 import { Base16 as Base16Converter } from './utils/Base16'
 import { GBK } from './utils/GBK';
 import { DownOutlined } from '@ant-design/icons';
-import { Flex, Input, Dropdown, Button, message, Breadcrumb } from 'antd';
+import { Flex, Input, Dropdown, Button, message, Breadcrumb, Card, Typography } from 'antd';
 import { useMediaQuery, useWindowSize } from "@uidotdev/usehooks";
 import { menuItems, menuItems2 } from "./MenuItems";
 import { useState } from 'react';
@@ -74,8 +74,8 @@ function Base16() {
     const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
     return (
-        <Flex gap="middle" vertical align="center" style={{ margin: isSmallDevice ? '40px 40px' : '40px 0' }} >
-            <Breadcrumb
+        <Flex gap="middle" vertical align="flex-start" style={{ margin: isSmallDevice ? '40px 40px' : '40px 0' }} >
+            <Breadcrumb style={{ padding: '0  0  0 32px' }}
                 items={[
                     {
                         title: '编码',
@@ -90,20 +90,25 @@ function Base16() {
                     }
                 ]}
             />
-            <h2>Base16编码</h2>
-            <TextArea style={style} id='text' />
-            <Flex gap="middle" vertical={false} align='center'>
-                <label>编码方式</label>
-                <Dropdown menu={menuProps}>
-                    <Button style={{ width: 120 }} >
-                        <label>{method}</label>
-                        <DownOutlined />
-                    </Button>
-                </Dropdown>
-                <Button type="primary" onClick={encode}>编码</Button>
-                <Button type="primary" onClick={decode}>解码</Button>
-            </Flex >
-            <TextArea disabled style={style} id='text2' />
+            <Card hoverable>
+                <Flex gap="small" vertical>
+                    <Typography.Title level={4}>Base16编码</Typography.Title>
+                    <Typography.Text type='secondary'>在线BASE16编码解码</Typography.Text>
+                    <TextArea style={style} id='text' />
+                    <Flex gap="middle" vertical={false} align='center'>
+                        <label>编码方式</label>
+                        <Dropdown menu={menuProps}>
+                            <Button style={{ width: 120 }} >
+                                <label>{method}</label>
+                                <DownOutlined />
+                            </Button>
+                        </Dropdown>
+                        <Button type="primary" onClick={encode}>编码</Button>
+                        <Button type="primary" onClick={decode}>解码</Button>
+                    </Flex >
+                    <TextArea disabled style={style} id='text2' />
+                </Flex >
+            </Card>
         </Flex >
     )
 }
